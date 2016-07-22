@@ -1,14 +1,14 @@
 # gu_js_lib
 share gu common js lib
----
+-
 ##检测输入框是否是输入中状态
---
+-
 
+
+```
 $("#textarea").keydown(function(){
 		 if(prepareEnable){
-			 
-
-			 var sendContent =$('#textarea').val();
+		 var sendContent =$('#textarea').val();
 			 if(sendContent){
 				 setTimeout(function(){
 					 var currentContent =$('#textarea').val();
@@ -22,8 +22,12 @@ $("#textarea").keydown(function(){
 		 }
 		
 	});
+```
+
 	
-	var typingIndex=1;
+
+```
+var typingIndex=1;
 /**
  *检查是否输入中 
  */
@@ -47,5 +51,6 @@ function checkIsType(message){
 	 	}
 	},2000);
 }
-	
-	--
+```
+
+-
