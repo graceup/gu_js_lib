@@ -12,7 +12,7 @@ $("#textarea").keydown(function(){
 			 if(sendContent){
 				 setTimeout(function(){
 					 var currentContent =$('#textarea').val();
-					 if(currentContent==sendContent){
+					 if(currentContent!=sendContent){
 						 checkIsType(sendContent);
 					 }
 				 },2000);
