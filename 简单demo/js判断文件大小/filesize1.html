@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta name="DEscription" contect="my code demo" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>js check file size </title>
+	
+	</head>
+	<body>
+		
+		<form method="post" enctype="multipart/form-data" id="fileForm">
+			
+			<img id="tempimg" DYNSRC="" src="" style="display:none" />
+		
+			<input type="file" name="file" id="fileuploade"   onchange="checkfile()" />
+		
+			<input type="button" name ="check" value="checkfilesize" onclick="checkfile()"/>
+		</form>
+
+	</body>
+	
+	<script type="text/javascript" src="http://jxcdn.jiaxincloud.com/plugins/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		
+		var maxsize = 2*1024*1024;//2M
+		var errMsg = "上传的附件文件不能超过2M！！！";
+		var tipMsg = "您的浏览器暂不支持计算上传文件的大小，确保上传文件不要超过2M，建议使用IE、FireFox、Chrome浏览器。";
+		
+		var browserCfg = {};
+		var ua = window.navigator.userAgent;
+		console.log(ua.indexOf("MSIE")>=1);
+		if (ua.indexOf("MSIE")>=1){
+			var jxBrowserVersion=jxBrowserVersion();
+			if(!jxBrowserVersion){
+				browserCfg.greaterIe10 = true;
+			}
+		}else if(ua.indexOf("Firefox")>=1){
+			browserCfg.firefox = true;
+		}else if(ua.indexOf("Chrome")>=1){
+			browserCfg.chrome = true;
+		}else{
+		 
+		}
+		
+		
+		/**
+		 * 检测ie浏览器版本(5-9)
+		 * @returns
+		 */
+		function jxBrowserVersion() {
+			var v = 3;
+			var div = document.createElement('div');
+			var i = div.getElementsByTagName('i');
+			while (div.innerHTML = '<!--[if gt ie ' + (++v) +']><i></i><![endif]-->', i[0]);
+		    
+		    return v > 4 ? true : false;
+		}
+
+		
+		console.log(browserCfg.greaterIe10);
+		
+		function checkfile(){
+			try{
+			 	var obj_file=null;
+
+				var uploadTarget=$('#fileForm');
+				
+				uploadTarget.find("input").each(function(){
+					var type = $(this).attr("type") || $(this)[0].tagName;
+					if(type == "file"){
+						obj_file=$(this)[0];
+					}  
+					
+				});
+				
+				console.log(obj_file);
+				
+				if(!obj_file){
+					alert("无file表单");
+				 	return;
+				}
+				
+			 	if(obj_file.value==""){
+			 		alert("请先选择上传文件");
+			 		return;
+			 	}
+			 	var filesize = 0;
+			 	if(browserCfg.firefox || browserCfg.chrome ||browserCfg.greaterIe10){
+			 		filesize = obj_file.files[0].size;
+			 	}else{
+			 		alert(tipMsg);
+				   	return;
+			 	}
+			 	if(filesize==-1){
+			 		alert(tipMsg);
+			 		return;
+			 	}else if(filesize>maxsize){
+			 		alert(errMsg);
+			 		return;
+				}else{
+					alert(filesize);
+			 		return;
+				}
+			}catch(e){
+				alert(e);
+			}
+		}
+		
+		
+	</script>
+</html>

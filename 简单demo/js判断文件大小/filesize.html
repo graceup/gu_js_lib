@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta name="DEscription" contect="my code demo" />
+	<meta name="Author" contect="Michael@www.micmiu.com" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>js check file size @ www.micmiu.com</title>
+	</head>
+	<body>
+		<img id="tempimg" dynsrc="" src="" style="display:none" />
+		<input type="file" name="file" id="fileuploade" size="40" />
+		<input type="button" name ="check" value="checkfilesize" onclick="checkfile()"/>
+
+	</body>
+	<script type="text/javascript">
+		var maxsize = 2*1024*1024;//2M
+		var errMsg = "上传的附件文件不能超过2M！！！";
+		var tipMsg = "您的浏览器暂不支持计算上传文件的大小，确保上传文件不要超过2M，建议使用IE、FireFox、Chrome浏览器。";
+		var  browserCfg = {};
+		var ua = window.navigator.userAgent;
+		if (ua.indexOf("MSIE")>=1){
+			browserCfg.ie = true;
+		}else if(ua.indexOf("Firefox")>=1){
+			browserCfg.firefox = true;
+		}else if(ua.indexOf("Chrome")>=1){
+			browserCfg.chrome = true;
+		}
+		function checkfile(){
+			try{
+			 	var obj_file = document.getElementById("fileuploade");
+			 	if(obj_file.value==""){
+			 		alert("请先选择上传文件");
+			 		return;
+			 	}
+			 	var filesize = 0;
+			 	if(browserCfg.firefox || browserCfg.chrome ){
+			 		filesize = obj_file.files[0].size;
+			 	}else if(browserCfg.ie){
+			 		var obj_img = document.getElementById('tempimg');
+			 		obj_img.dynsrc=obj_file.value;
+			 		filesize = obj_img.fileSize;
+			 	}else{
+			 		alert(tipMsg);
+			   	return;
+			 	}
+			 	if(filesize==-1){
+			 		alert(tipMsg);
+			 		return;
+			 	}else if(filesize>maxsize){
+			 		alert(errMsg);
+			 		return;
+				}else{
+					alert("文件大小符合要求");
+			 		return;
+				}
+			}catch(e){
+				alert(e);
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>title</title>
+ 
+</head>
+
+<body>
+ 
+ 
+</body>
+ 
+   
+ 
+
+<script type="text/javascript">
+
+
+var jiaxinUnloadConfirm={};
+jiaxinUnloadConfirm.MSG = "离开可能导致数据丢失\n您确定要离开吗？";
+jiaxinUnloadConfirm.set = function(a) {
+  window.onbeforeunload = function(b) {
+     b = b||window.event;
+     b.returnValue = a;
+     return a
+ }
+};
+jiaxinUnloadConfirm.clear = function() { 
+  window.onbeforeunload = function(){}
+};
+jiaxinUnloadConfirm.set(jiaxinUnloadConfirm.MSG);
+
+ 
+	
+</script>
+
+</html>

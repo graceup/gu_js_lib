@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta name="DEscription" contect="my code demo" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>js check file size </title>
+	
+	</head>
+	<body>
+		
+		<form method="post" enctype="multipart/form-data" id="fileForm">
+			
+			<img id="tempimg" DYNSRC="" src="" style="display:none" />
+		
+			<input type="file" name="file" id="fileuploade"   onchange="checkfile()" />
+		
+			<input type="button" name ="check" value="checkfilesize" onclick="checkfile()"/>
+		</form>
+
+	</body>
+	
+	<script type="text/javascript" src="http://jxcdn.jiaxincloud.com/plugins/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+		
+		var maxsize = 2*1024*1024;//2M
+		var errMsg = "上传的附件文件不能超过2M！！！";
+		var tipMsg = "您的浏览器暂不支持计算上传文件的大小，确保上传文件不要超过2M，建议使用IE、FireFox、Chrome浏览器。";
+		
+		 
+		
+		function checkfile(){
+			try{
+			 	var obj_file=null;
+
+				var uploadTarget=$('#fileForm');
+				
+				uploadTarget.find("input").each(function(){
+					var type = $(this).attr("type") || $(this)[0].tagName;
+					if(type == "file"){
+						obj_file=$(this)[0];
+					}  
+					
+				});
+				
+				if(!obj_file){
+					alert("无file表单");
+				 	return;
+				}
+				
+			 	if(obj_file.value==""){
+			 		alert("请先选择上传文件");
+			 		return;
+			 	}
+			 	if(obj_file&&obj_file.files&&obj_file.files[0]&&obj_file.files[0].size){
+			 		var filesize = obj_file.files[0].size;
+			 		if(filesize>maxsize){
+			 			
+			 		}
+			 	}else{
+			 		alert(tipMsg);
+				   	return;
+			 	}
+			}catch(e){
+				alert(e);
+			}
+		}
+		
+		
+	</script>
+</html>

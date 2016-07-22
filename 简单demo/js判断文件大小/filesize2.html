@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>文件上传大小判断</title>
+<script type="text/javascript">
+function getFileSize(filePath) {
+console.log(filePath);
+var image = document.getElementById("image");
+image.dynsrc = filePath;
+alert(image.fileSize);
+}
+</script>
+</head>
+<body>
+<input type="file" name="file" onchange="getFileSize(this.value);" />
+<img id="image" dynsrc="" />
+</body>
+</html>
