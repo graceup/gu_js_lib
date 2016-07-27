@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>预加载loading</title>
+	<style>
+	body{
+	 margin: 0;
+	}
+	#loading{
+		background-color: #f89c37;
+		height: 100%;
+		width: 100%;
+		position: fixed;
+		z-index: 1;
+		margin-top: 0px;
+		top: 0px;
+	}
+	#loading-center{
+		width: 100%;
+		height: 100%;
+		position: relative;
+		}
+	#loading-center-absolute {
+		position: absolute;
+		left: 50%;
+		top: 40%;
+		height: 50px;
+		width: 50px;
+		margin-top: -25px;
+		margin-left: -25px;
+	}
+	.object{
+		width: 50px;
+		height: 5px;
+		-webkit-animation: animate 2s infinite;
+		animation: animate 2s infinite;
+		position: absolute;
+		top: 0px;
+		right: -200px;
+		}
+	@-webkit-keyframes animate {
+	 
+	  50% {
+		-ms-transform: translate(-400px,0) rotate(-360deg); 
+	   	-webkit-transform: translate(-400px,0) rotate(-360deg); 
+	    transform: translate(-400px,0) rotate(-360deg); 
+		  }
+
+	 100% {
+		-ms-transform: translate(0,0) rotate(360deg); 
+	   	-webkit-transform: translate(0,0) rotate(360deg); 
+	    transform: translate(0,0) rotate(360deg); 
+		  }	 
+	}
+
+	@keyframes animate {
+	  50% {
+		-ms-transform: translate(-400px,0) rotate(-360deg); 
+	   	-webkit-transform: translate(-400px,0) rotate(-360deg); 
+	    transform: translate(-400px,0) rotate(-360deg); 
+		  }
+
+	 100% {
+		-ms-transform: translate(0,0) rotate(360deg); 
+	   	-webkit-transform: translate(0,0) rotate(360deg); 
+	    transform: translate(0,0) rotate(360deg); 
+		  }	 	
+	  
+	}
+	
+	#center-tips {
+	    position: absolute;
+	    width: 350px;
+	    text-align: center;
+	    top: 340%;
+	    left: -57px;
+	    color: #8E1C12;
+	        font-weight: bold;
+	}
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<div id="loading">
+		<div id="loading-center">
+			<div id="loading-center-absolute">
+				<div class="object" id="object_one">
+				<img   src="http://wx2015.oss-cn-shanghai.aliyuncs.com/201612514452.png">	
+				</div>
+				
+				<p id="center-tips">
+				正在努力的抢红包中
+				<br>
+				<span id="timer">
+				5
+				</span>
+				</p>
+			</div>
+		</div>
+	</div>
+ 
+<script type="text/javascript">
+function run(){
+var s = document.getElementById("timer");
+if(s.innerHTML == 0){
+ //window.location.href='你的链接';
+return false;
+}
+	s.innerHTML = s.innerHTML * 1 - 1;
+}
+window.setInterval("run();", 1000);
+</script>
+
+</body>
+</html>
