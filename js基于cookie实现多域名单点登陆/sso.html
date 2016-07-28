@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>grace-up</title> 
+<meta name="author" content="lyn">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="util-cookie.js"></script>
+<script type="text/javascript">
+/**
+ * 获取url中的的参数
+ */		
+function getQueryString(name) {
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if(r!=null) {
+		    	return  unescape(r[2]); 
+		    }
+		   	return null;
+}
+
+var oper=getQueryString('oper');
+if(oper=='leave'){
+	delCookie("ssoToken");
+}else if(oper=='in'){
+	var ssoToken=getQueryString("ssoToken");
+	setCookie("ssoToken",ssoToken);
+}
+</script>
+</body>
+</html>
