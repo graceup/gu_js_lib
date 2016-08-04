@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>定制基于jQuery js检验插件</title>
+
+</head>
+<body>
+
+	<div id="form">
+		<p>
+			<span>姓名</span> <input type="text"
+				ui-validate="{pattern:'required',maxlength: 50}"
+				ui-vtext="姓名"  name="username"><font
+				color="red"> *</font>
+		</p>
+		<p>
+			<span>邮箱</span> <input type="text"
+				ui-validate="{pattern:'email,required',maxlength: 50}" ui-vtext="邮箱"
+			  name="email"><font color="red"> *</font>
+		</p>
+		<p>
+			<span>ip</span> <input type="text"
+				ui-validate="{pattern:'ipAddress,required'}" ui-vtext="ip"
+				 name="ip"><font color="red"> *</font>
+		</p>
+		<p>
+			<span>留言</span>
+			<textarea rows="5" placeholder="请在此留言" type="text"
+				ui-validate="{pattern:'all',maxlength: 250}"
+				ui-vtext="留言"  name="content"></textarea>
+			<font color="red"> *</font>
+		</p>
+
+		<p>
+			<button onclick="getForm()">getForm</button>
+		</p>
+	</div>
+
+	<script type="text/javascript"
+		src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="ui-validate.js"></script>
+
+	<script type="text/javascript">
+		function getForm() {
+			if (!GuValidate.validateForm($('#form'))) {
+				return;
+			}else{
+				alert('检验通过');
+			}
+
+			var data = GuValidate.formToBean($('#form'));
+			console.log(data);
+
+		}
+	</script>
+
+</body>
+</html>
