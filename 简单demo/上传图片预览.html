@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="full-screen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="360-fullscreen" content="true" />
+		<title>图片上传预览及生成base64</title>
+		<style>
+			/*图片上传*/
+			
+			.img-upload-con {
+				position: relative;
+				margin: 0 auto;
+				width: 80px;
+				height: 80px;
+				overflow: hidden;
+				border: 1px solid #CCCCCC;
+			}
+			
+			.uploader_input_wrp {
+				margin: 0;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 80px;
+				height: 80px;
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+			
+			.uploader_input {
+				position: absolute;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+				cursor: pointer;
+			}
+			
+			.uploader_input_wrp:before,
+			.uploader_input_wrp:after {
+				content: " ";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				background-color: #D9D9D9;
+			}
+			
+			.uploader_input_wrp:before {
+				width: 1px;
+				height: 15px;
+			}
+			
+			.uploader_input_wrp:after {
+				width: 15px;
+				height: 1px;
+			}
+			
+			.img-pre-con {
+				width: 100%;
+			}
+			
+			.img-pre-con img {
+				width: 100%;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h4>图片上传预览及生成base64</h2>
+		<div class="img-pre-con">
+		</div>
+		<div class="img-upload-con">
+			<div class="uploader_input_wrp">
+				<input type="file" class="upload-photo uploader_input" id="supervise_photo" name="upload$photo" placeholder="上传图片" capture="camera" accept="image/*">
+			</div>
+		</div>
+		<script>
+			var imgNum = 0;
+			document.querySelector('.upload-photo').addEventListener('change', function() {
+				var imgData = {};
+				if(document.querySelector(".upload-photo").files && document.querySelector(".upload-photo").files[0]) {
+					var file = document.querySelector(".upload-photo").files[0];
+					 //检验是否为图片文件 
+					 if(!/image\/\w+/.test(file.type)) {
+					 	alert("看清楚，这个需要图片！");
+					 	return false;
+					 }
+					 imgNum++;
+					 var imgObj = document.createElement('img');
+					imgObj.classList.add('img-pre' + imgNum);
+					var html = '<img class="img-pre' + imgNum + '" src="" alt="" />'
+					document.querySelector(".img-pre-con").appendChild(imgObj);
+					imgData.fileName = file.name;
+					imgData.fileSize = file.size;
+					imgData.fileType = file.type;
+					imgData.base64 = {};
+					readURL(document.querySelector(".upload-photo"), document.querySelector('.img-pre' + imgNum), imgData);
+					console.log('imgData', imgData);
+					//其他操作...
+				}
+			});
+
+			function readURL(input, tmpimg, imgData) {
+				if(input.files && input.files[0]) {
+					var reader = new FileReader();
+					//注册onload事件
+					reader.onload = function(e) {
+							if(!/image/.test(e.target.result)) {
+								alert('请上传图片格式...');
+								return false;
+							}
+							tmpimg.setAttribute('src', e.target.result);
+							//console.log(e.target.result);
+							imgData.base64 = e.target.result;
+						}
+						//读取文件成为二进制流
+					reader.readAsDataURL(input.files[0]);
+				}
+			};
+		</script>
+	</body>
+</html>
