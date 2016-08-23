@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>js拼装xml</title>
+</head>
+<body>
+	<button onclick="createXML2()">拼装xml</button>
+
+	<div id="xml"></div>
+
+</body>
+
+<script type="text/javascript">
+
+var Util = {};
+
+Util = new function() {
+
+	this.xml = function(xml) {
+		var o = {};
+		o.xml = xml;
+		o.appendOneLine = function(oneLine) {
+			this.xml=this.xml+oneLine;
+		};
+		return o;
+	}
+	
+	
+	
+	 
+}
+
+	function createXML2() {
+	
+		var xml = Util.xml(""); 
+		xml.appendOneLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"); 
+		alert(xml.xml);
+	}
+	
+	
+	 
+
+	function createXML() {
+		var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+		//创建两条处理指令     
+		var newPI = xmlDoc.createProcessingInstruction("xml",
+				"version=\"1.0\" encoding=\"utf-8\"");
+		xmlDoc.appendChild(newPI);
+		//创建根元素     
+		var documentElement = xmlDoc.createElement("req");
+		xmlDoc.appendChild(documentElement);
+		//创建CDATA     
+		//var newCD=xmlDoc.createCDATASection("This is a CDATASection node");     
+		//xmlDoc.documentElement.appendChild(newCD);     
+
+		//创建元素invoice,其子元素customer，再为customer加上属性，     
+		var chatRoom = xmlDoc.createElement("chatRoom");
+		var id = xmlDoc.createElement("id");
+		var cname = xmlDoc.createElement("cname");
+		var ctype = xmlDoc.createElement("ctype");
+		var maxUsers = xmlDoc.createElement("maxUsers");
+		var welcomes = xmlDoc.createElement("welcomes");
+		var description = xmlDoc.createElement("description");
+		var status = xmlDoc.createElement("status");
+		var startTime = xmlDoc.createElement("startTime");
+		var closeTime = xmlDoc.createElement("closeTime");
+		var createTime = xmlDoc.createElement("createTime");
+
+		chatRoom.appendChild(id);
+		chatRoom.appendChild(cname);
+		chatRoom.appendChild(ctype);
+		chatRoom.appendChild(maxUsers);
+		chatRoom.appendChild(welcomes);
+		chatRoom.appendChild(description);
+		chatRoom.appendChild(status);
+		chatRoom.appendChild(startTime);
+		chatRoom.appendChild(closeTime);
+		chatRoom.appendChild(createTime);
+
+		//创建text节点，作为id元素的内容     
+		var idtext = xmlDoc.createTextNode('wwww');
+		var nametext = xmlDoc.createTextNode('ddddd');
+		var welcomestext = xmlDoc.createTextNode('ssss');
+		var descriptiontext = xmlDoc.createTextNode('qqqq');
+		var startTimetext = xmlDoc.createTextNode('tttt');
+		var closeTimetext = xmlDoc.createTextNode('rrrrrr');
+
+		id.appendChild(idtext);
+		cname.appendChild(nametext);
+		ctype.appendChild(xmlDoc.createTextNode("1"));
+		maxUsers.appendChild(xmlDoc.createTextNode("500"));
+		welcomes.appendChild(welcomestext);
+		description.appendChild(descriptiontext);
+
+		status.appendChild(xmlDoc.createTextNode("1"));
+		createTime.appendChild(xmlDoc.createTextNode(new Date()));
+		startTime.appendChild(startTimetext);
+		closeTime.appendChild(closeTimetext);
+
+		xmlDoc.documentElement.appendChild(chatRoom);
+		alert(xmlDoc.xml);
+		//	$("#xml").html((xmlDoc.xml)+"");
+	}
+</script>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</html>

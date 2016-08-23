@@ -1,0 +1,125 @@
+<html>
+<head>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $("p").click(function(){
+  $(this).hide();
+  
+  //var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");   
+   var xmlDoc;   
+   var moz = (typeof document.implementation != "undefined") && (typeof document.implementation.createDocument != "undefined") ;     
+   var ie = (typeof window.ActiveXObject != "undefined") ;     
+       
+   if (moz)     
+   {     
+       xmlDoc = document.implementation.createDocument("", "doc", null);    
+        var oXmlDom = document.implementation.createDocument("","doc",null);    
+        var oRoot = oXmlDom.documentElement;    
+        var testnode = document.createElement("req");   
+        oRoot = testnode;    
+        var r2 = oXmlDom.documentElement;    
+        var r2_text = document.createElement("chatRoom");   
+        r2=r2_text;   
+           
+        var xs = new XMLSerializer();    
+           
+        var node = document.createElement("cname");    
+        node.textContent='ddddd';   
+  
+        node = document.createElement("ctype");    
+        node.textContent='aaaa';r2.appendChild(node);   
+        node = document.createElement("maxUsers");    
+        node.textContent='eeee';r2.appendChild(node);   
+        node = document.createElement("welcomes");    
+        node.textContent='gggg';r2.appendChild(node);   
+        node = document.createElement("description");    
+        node.textContent='wwwww';r2.appendChild(node);   
+        node = document.createElement("status");    
+        node.textContent='ssss';r2.appendChild(node);   
+        node = document.createElement("startTime");    
+        node.textContent='yyyy';r2.appendChild(node);   
+        node = document.createElement("closeTime");    
+        node.textContent='iiiii';r2.appendChild(node);   
+        node = document.createElement("createTime");    
+        node.textContent="llll";r2.appendChild(node);   
+           
+        oRoot.appendChild(r2);    
+  
+        alert(xs.serializeToString( oRoot ));   
+   }else if (ie)   
+   {     
+      var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");     
+   //return xmldoc;    
+      
+    //xmlDoc.async=false;   
+    //������������ָ��   
+    var newPI=xmlDoc.createProcessingInstruction("xml","version=\"1.0\" encoding=\"utf-8\"");   
+    xmlDoc.appendChild(newPI);   
+    //������Ԫ��   
+    var documentElement=xmlDoc.createElement("req");   
+    xmlDoc.appendChild(documentElement);   
+    //����CDATA   
+    //var newCD=xmlDoc.createCDATASection("This is a CDATASection node");   
+    //xmlDoc.documentElement.appendChild(newCD);   
+  
+    //����Ԫ��invoice,����Ԫ��customer����Ϊcustomer�������ԣ�   
+    var chatRoom=xmlDoc.createElement("chatRoom");   
+    var id=xmlDoc.createElement("id");   
+    var cname=xmlDoc.createElement("cname");   
+    var ctype=xmlDoc.createElement("ctype");   
+    var maxUsers=xmlDoc.createElement("maxUsers");   
+    var welcomes=xmlDoc.createElement("welcomes");   
+    var description=xmlDoc.createElement("description");   
+    var status=xmlDoc.createElement("status");   
+    var startTime=xmlDoc.createElement("startTime");   
+    var closeTime=xmlDoc.createElement("closeTime");   
+    var createTime=xmlDoc.createElement("createTime");   
+       
+    chatRoom.appendChild(id);   
+    chatRoom.appendChild(cname);   
+    chatRoom.appendChild(ctype);   
+    chatRoom.appendChild(maxUsers);   
+    chatRoom.appendChild(welcomes);   
+    chatRoom.appendChild(description);   
+    chatRoom.appendChild(status);   
+    chatRoom.appendChild(startTime);   
+    chatRoom.appendChild(closeTime);   
+    chatRoom.appendChild(createTime);   
+  
+    //����text�ڵ㣬��ΪidԪ�ص�����   
+    var idtext=xmlDoc.createTextNode('wwww');   
+    var nametext=xmlDoc.createTextNode('ddddd');   
+    var welcomestext=xmlDoc.createTextNode('ssss');   
+    var descriptiontext=xmlDoc.createTextNode('qqqq');   
+    var startTimetext=xmlDoc.createTextNode('tttt');   
+    var closeTimetext=xmlDoc.createTextNode('rrrrrr');   
+       
+    id.appendChild(idtext);   
+    cname.appendChild(nametext);   
+    ctype.appendChild(xmlDoc.createTextNode("1"));       
+    maxUsers.appendChild(xmlDoc.createTextNode("500"));   
+    welcomes.appendChild(welcomestext);   
+    description.appendChild(descriptiontext);   
+       
+    status.appendChild(xmlDoc.createTextNode("1"));   
+    createTime.appendChild(xmlDoc.createTextNode(new Date()));   
+    startTime.appendChild(startTimetext);   
+    closeTime.appendChild(closeTimetext);   
+       
+    xmlDoc.documentElement.appendChild(chatRoom);   
+    alert(xmlDoc.xml);   
+   }   
+
+  });
+});
+</script>
+
+</head>
+<body>
+	<p>If you click on me, I will disappear.</p>
+
+</body>
+</html>

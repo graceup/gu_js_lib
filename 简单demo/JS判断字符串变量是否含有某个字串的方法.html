@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>JS判断字符串变量是否含有某个字串的方法</title>
+</head>
+<body>
+ 
+ 
+ <button onclick="isContain()">isContain</button>
+ <br>
+ <br>
+ <br>
+ <button onclick="isContain2()">isContain2</button>
+ 
+</body>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> 
+
+<script type="text/javascript">
+
+	function isContain(){
+		var d="5e2606eb@wkgroup.im.jxccp.com/Visitor";
+		
+		alert(d.indexOf("Visitor") > 0);
+		
+	}
+	function isContain2(){
+		var d="5e2606eb@wkgroup.im.jxccp.com/Visit";
+		
+		alert(d.indexOf("Visitor") > 0);
+		
+	}
+	
+	
+
+
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+<html  xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     
+<title>onbeforeunload测试</title>    
+<script type="text/javascript">   
+    window.onbeforeunload = onbeforeunload_handler;   
+    window.onunload = onunload_handler;   
+    function onbeforeunload_handler(){   
+        var warning="确认退出会议吗?";           
+        return warning;   
+    }   
+    
+    
+    function onunload_handler(){   
+        var warning="谢谢光临";   
+        alert(warning);   
+    }
+    
+</script>   
+    
+</head>
+     
+<body>    
+</body>
+    
+</html>
